@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои заказы</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .order {
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order h2 {
+            color: #333;
+        }
+        .order p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <a href="{% url 'home' %}" class="back-button">Главная</a>
+    </div>
+    <div class="container">
+        <h1>Мои заказы</h1>
+        {% for order in orders %}
+        <div class="order">
+            <h2>Заказ №{{ order.id }}</h2>
+            <p>Статус: {{ order.status.name }}</p>
+            <p>Место получения: {{ order.pickup_location }}</p>
+            <p>Дата доставки: {{ order.delivery_date }}</p>
+            <p>Статус оплаты: {{ order.payment_status }}</p>
+            <p>Метод оплаты: {{ order.payment_method }}</p>
+            <h3>Автомобиль:</h3>
+            <ul>
+                <li>{{ order.car_id.dev_id.name }} {{ order.car_id.model_id.name }} ({{ order.car_id.year }})</li>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Площадка для покупки машин из Китая и Кореи</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ffebcd, #ffb6c1);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #000;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            background: linear-gradient(to bottom, #ffa500, #ff4500);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav a:hover {
+            background-color: #ff4500;
+            color: #fff;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-top: 20px;
+            text-align: center;
+            position: relative;
+            flex: 2;
+        }
+        form button[type="submit"] {
+            background-color: #ffa500;
+            color: #fff;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        form button[type="submit"]:hover {
+            background-color: #ff4500;
+        }
+        .catalog {
+            margin-top: 20px;
+        }
+        .catalog ul {
+            list-style: none;
+            padding: 0;
+        }
+        .catalog ul li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+        }
+        .photo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        .photo {
+            flex: 1;
+            margin: 0 20px;
+            align-self: flex-start;
+        }
+        .photo img {
+            width: 110%;
+            height: auto;
+            max-width: 550px;
+            border-radius: 10px;
+        }
+        .center-text {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .info-block {
+            background-color: #ffecb3;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .inner-info {
+            background-color: #ffedc5;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .add-button {
+            background-color: #ff7043;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .add-button:hover {
+            background-color: #ff5722;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_dev_id').change(function() {
+                var url = '{% url "ajax_load_car_models" %}';
+                var devId = $(this).val();
+                $.ajax({
+                    url: url,
+                    data: {
+                        'dev_id': devId
+                    },
+                    success: function(data) {
+                        $("#id_model_id").html('');
+                        for (var i = 0; i < data.length; i++) {
+                            $("#id_model_id").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://www.filepicker.io/api/file/bhk9WahjQbu3taMGG08Q" alt="Логотип" style="width: 200px; height: auto;">
+        </div>
+        <h1>Площадка для покупки машин из Китая и Кореи</h1>
+        <nav>
+            <a href="{% url 'home' %}">Главная</a>
+            <a href="{% url 'catalog' %}">Каталог</a>
+            <a href="{% url 'aboutus' %}">О нас</a>
+            <a href="{% url 'contacts' %}">Контакты</a>
+            {% if user.is_superuser %}
+                <a href="{% url 'all_orders' %}">Заказы пользователей</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+            {% elif user.is_authenticated %}
+                <a href="{% url 'cart' %}">Корзина</a>
+                <a href="{% url 'orders' %}">Мои заказы</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a href="{% url 'login' %}">Войти</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </nav>
+        <div class="info-block">
+            <div class="inner-info">
+                {% if user.is_superuser %}
+                    <h2 class="center-text">Добавить новую модель</h2>
+                {% endif %}
+                <div class="photo-container">
+                    <div class="photo">
+                        <img src="https://militaryarms.ru/wp-content/uploads/2021/08/south-korean-flag-scaled.jpg" alt="Фото слева">
+                    </div>
+                    {% if user.is_superuser %}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="add-button">Добавить авто</button>
+                        </form>
+                    {% endif %}
+                    <div class="photo">
+                        <img src="https://kartinki.pics/uploads/posts/2021-07/1625859986_1-kartinkin-com-p-flag-kitaya-oboi-krasivie-1.jpg" alt="Авто справа">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="photo-container">
+            <div class="photo">
+                <img src="https://img-fotki.yandex.ru/get/5801/26720365.df/0_8319f_fe08eb8c_orig.jpg" alt="Авто слева">
+            </div>
+            <div class="photo">
+                <img src="https://sportishka.com/uploads/posts/2023-12/1701922882_sportishka-com-p-krasivie-kitaiskie-avto-krasivo-41.jpg" alt="Природа справа">
+            </div>
+        </div>
+        <hr>
+    </div>
+</body>
+</html>

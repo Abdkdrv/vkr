@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказы пользователей</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .order {
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order h2 {
+            color: #333;
+        }
+        .order p {
+            color: #666;
+        }
+        .order form {
+            margin-top: 20px;
+        }
+        .order input[type="text"],
+        .order input[type="date"],
+        .order select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .order button[type="submit"] {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #ff7e5f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .order button[type="submit"]:hover {
+            background-color: #feb47b;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <a href="{% url 'home' %}" class="back-button">Главная</a>
+    </div>
+    <div class="container">
+        <h1>Заказы пользователей</h1>
+        {% for order in orders %}
+        <div class="order">
+            <h2>Заказ №{{ order.id }}</h2>
+            <p>Пользователь: {{ order.user_id.last_name }} {{ order.user_id.first_name }}</p>
+            <p>Автомобиль: {{ order.car_id.dev_id.name }} {{ order.car_id.model_id.name }} ({{ order.car_id.year }})</p>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="order_id" value="{{ order.id }}">
+                <label for="pickup_location_{{ order.id }}">Место получения:</label>
+                <input type="text" id="pickup_location_{{ order.id }}" name="pickup_location" value="{{ order.pickup_location }}">
+
+                <label for="delivery_date_{{ order.id }}">Дата доставки:</label>
+                <input type="date" id="delivery_date_{{ order.id }}" name="delivery_date" value="{{ order.delivery_date|date:"Y-m-d" }}">
+
+                <label for="status_{{ order.id }}">Статус:</label>
+                <select id="status_{{ order.id }}" name="status">
+                    {% for status in form.fields.status.queryset %}
+                        <option value="{{ status.id }}" {% if order.status.id == status.id %}selected{% endif %}>{{ status.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

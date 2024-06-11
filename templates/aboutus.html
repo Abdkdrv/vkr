@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>О нас</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        p {
+            text-align: center;
+            color: #666;
+        }
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #ff7e5f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #feb47b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>О нас</h1><br>
+        <p>Наша цель - обеспечить Покупателей наилучшим обслуживанием при покупке и доставке автомобиля.</p>
+        <p>Мы быстро и четко решаем задачи наших клиентов, связанные с покупкой, таможней и перегоном автомобилей.</p>
+        <p>У нас Вы можете найти лучшие варианты автомобилей из Южной Кореи и Китая под Ваш бюджет.</p><br>
+        <h3>Мы на связи 24/7</h3>
+        <p>Мы готовы ответить на любые Ваши вопросы в любое время.</p><br>
+        <h3>Честный подбор</h3>
+        <p>При подборе автомобиля, мы тщательно выбираем специальные сервисы по проверке и диагностике автомобиля при личном осмотре.</p>
+        <a href="{% url 'home' %}">Вернуться на главную</a>
+    </div>
+</body>
+</html>

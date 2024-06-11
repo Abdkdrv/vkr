@@ -1,0 +1,322 @@
+[
+    {
+        "model": "carshop.Developer",
+        "pk": 1,
+        "fields": {
+            "name": "Kia"
+        }
+    },
+    {
+        "model": "carshop.Developer",
+        "pk": 2,
+        "fields": {
+            "name": "Haval"
+        }
+    },
+    {
+        "model": "carshop.Developer",
+        "pk": 3,
+        "fields": {
+            "name": "Hyundai"
+        }
+    },
+    {
+        "model": "carshop.Developer",
+        "pk": 4,
+        "fields": {
+            "name": "Honda"
+        }
+    },
+    {
+        "model": "carshop.Developer",
+        "pk": 5,
+        "fields": {
+            "name": "Exeed"
+        }
+    },
+    {
+        "model": "carshop.Developer",
+        "pk": 6,
+        "fields": {
+            "name": "Geely"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 1,
+        "fields": {
+            "name": "Sorento",
+            "dev_id": "1"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 2,
+        "fields": {
+            "name": "Sportage",
+            "dev_id": "1"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 3,
+        "fields": {
+            "name": "Jolion",
+            "dev_id": "2"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 4,
+        "fields": {
+            "name": "F7",
+            "dev_id": "2"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 5,
+        "fields": {
+            "name": "Grandeur",
+            "dev_id": "3"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 6,
+        "fields": {
+            "name": "Avante",
+            "dev_id": "3"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 7,
+        "fields": {
+            "name": "Fit",
+            "dev_id": "4"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 8,
+        "fields": {
+            "name": "Accord",
+            "dev_id": "4"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 9,
+        "fields": {
+            "name": "TXL",
+            "dev_id": "5"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 10,
+        "fields": {
+            "name": "LX",
+            "dev_id": "5"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 11,
+        "fields": {
+            "name": "Monjaro",
+            "dev_id": "6"
+        }
+    },
+    {
+        "model": "carshop.CarModel",
+        "pk": 12,
+        "fields": {
+            "name": "Coolray",
+            "dev_id": "6"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 1,
+        "fields": {
+            "name": "Красный"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 2,
+        "fields": {
+            "name": "Синий"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 3,
+        "fields": {
+            "name": "Черный"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 4,
+        "fields": {
+            "name": "Белый"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 5,
+        "fields": {
+            "name": "Желтый"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 6,
+        "fields": {
+            "name": "Коричневый"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 7,
+        "fields": {
+            "name": "Зеленый"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 8,
+        "fields": {
+            "name": "Фиолетовый"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 9,
+        "fields": {
+            "name": "Серый"
+        }
+    },
+    {
+        "model": "carshop.Color",
+        "pk": 10,
+        "fields": {
+            "name": "Оранжевый"
+        }
+    },
+    {
+        "model": "carshop.Condition",
+        "pk": 1,
+        "fields": {
+            "name": "Новый"
+        }
+    },
+    {
+        "model": "carshop.Condition",
+        "pk": 2,
+        "fields": {
+            "name": "Б/У"
+        }
+    },
+    {
+        "model": "carshop.Transmission",
+        "pk": 1,
+        "fields": {
+            "name": "4WD"
+        }
+    },
+    {
+        "model": "carshop.Transmission",
+        "pk": 2,
+        "fields": {
+            "name": "AWD"
+        }
+    },
+    {
+        "model": "carshop.Transmission",
+        "pk": 3,
+        "fields": {
+            "name": "FWD"
+        }
+    },
+    {
+        "model": "carshop.Transmission",
+        "pk": 4,
+        "fields": {
+            "name": "RWD"
+        }
+    },
+    {
+        "model": "carshop.Fuel",
+        "pk": 1,
+        "fields": {
+            "name": "Бензин"
+        }
+    },
+    {
+        "model": "carshop.Fuel",
+        "pk": 2,
+        "fields": {
+            "name": "Дизель"
+        }
+    },
+    {
+        "model": "carshop.Fuel",
+        "pk": 3,
+        "fields": {
+            "name": "Газ"
+        }
+    },
+    {
+        "model": "carshop.Fuel",
+        "pk": 4,
+        "fields": {
+            "name": "Электричество"
+        }
+    },
+    {
+        "model": "carshop.Fuel",
+        "pk": 5,
+        "fields": {
+            "name": "Гибрид"
+        }
+    },
+    {
+        "model": "carshop.Status",
+        "pk": 1,
+        "fields": {
+            "name": "Заказ оформлен"
+        }
+    },
+    {
+        "model": "carshop.Status",
+        "pk": 2,
+        "fields": {
+            "name": "Подготовка к отправке"
+        }
+    },
+    {
+        "model": "carshop.Status",
+        "pk": 3,
+        "fields": {
+            "name": "В пути"
+        }
+    },
+    {
+        "model": "carshop.Status",
+        "pk": 4,
+        "fields": {
+            "name": "Доставлен"
+        }
+    },
+    {
+        "model": "carshop.Status",
+        "pk": 5,
+        "fields": {
+            "name": "Получен"
+        }
+    }
+]

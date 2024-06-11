@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Корзина</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cart-item {
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .cart-item img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        .cart-item h2 {
+            color: #333;
+        }
+        .cart-item p {
+            color: #666;
+        }
+        .cart-item .remove-button {
+            padding: 10px 20px;
+            background-color: #ff7e5f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .cart-item .remove-button:hover {
+            background-color: #feb47b;
+        }
+        .checkout-button {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #ff7e5f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .checkout-button:hover {
+            background-color: #feb47b;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'catalog' %}" class="back-button">Назад к каталогу</a>
+    <div class="container">
+        <h1>Корзина</h1>
+        <div class="cart-items">
+            {% for item in cart.items.all %}
+            <div class="cart-item">
+                <img src="{{ item.car.image.url }}" alt="{{ item.car.model }}">
+                <div>
+                    <h4>Марка: {{ item.car.dev_id.name }}</h4>
+                    <p>Модель: {{ item.car.model_id.name }}</p>
+                    <p>Год выпуска: {{ item.car.year }}</p>
+                    <p>Цвет: {{ item.car.color_id.name }}</p>
+                    <p>Стоимость: {{ item.car.price }}</p>
+                </div>
+                <a href="{% url 'remove_from_cart' item.id %}" class="remove-button">Удалить</a>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'checkout' %}" class="checkout-button">Оформить заказ</a>
+    </div>
+</body>
+</html>

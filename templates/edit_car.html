@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать модель авто</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            appearance: none; /* Убираем стандартный вид для input и textarea */
+            background-color: #fff;
+        }
+        .form-container select {
+            appearance: none; /* Убираем стандартный вид для select */
+            background-color: #fff;
+        }
+        .form-container button[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff7e5f;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-container button[type="submit"]:hover {
+            background-color: #feb47b;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_dev_id').change(function() {
+                var url = '{% url "ajax_load_car_models" %}';
+                var devId = $(this).val();
+                $.ajax({
+                    url: url,
+                    data: {
+                        'dev_id': devId
+                    },
+                    success: function(data) {
+                        $("#id_model_id").html('');
+                        for (var i = 0; i < data.length; i++) {
+                            $("#id_model_id").append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Редактировать модель авто</h1>
+        <div class="form-container">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="id_dev_id">Марка:</label>
+                {{ form.dev_id }}
+                <label for="id_model_id">Модель:</label>
+                {{ form.model_id }}
+                <label for="id_year">Год выпуска:</label>
+                <input type="number" id="id_year" name="year" value="{{ form.instance.year }}" required>
+                <label for="id_color_id">Цвет:</label>
+                {{ form.color_id }}
+                <label for="id_kilometers">Пробег:</label>
+                <input type="number" id="id_kilometers" name="kilometers" value="{{ form.instance.kilometers }}" required>
+                <label for="id_condition_id">Состояние:</label>
+                {{ form.condition_id }}
+                <label for="id_price">Стоимость:</label>
+                <input type="number" id="id_price" name="price" value="{{ form.instance.price }}" required>
+                <label for="id_transmission_id">Привод:</label>
+                {{ form.transmission_id }}
+                <label for="id_fuel_id">Тип топлива:</label>
+                {{ form.fuel_id }}
+                <label for="id_engine_capacity">Объем двигателя:</label>
+                <input type="number" step="0.1" id="id_engine_capacity" name="engine_capacity" value="{{ form.instance.engine_capacity }}" required>
+                <label for="id_desc">Описание:</label>
+                <textarea id="id_desc" name="desc" rows="4" required>{{ form.instance.desc }}</textarea>
+                <label for="id_image">Изображение:</label>
+                <input type="file" id="id_image" name="image" accept="image/*">
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
